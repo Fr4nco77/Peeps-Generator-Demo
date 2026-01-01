@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 const tiffany = localFont({
-  src: "./Tiffany.ttf",
+  src: "../public/Tiffany.ttf",
   variable: "--tiffany",
 });
 
