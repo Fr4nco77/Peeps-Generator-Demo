@@ -9,6 +9,8 @@ import { formats, installCode } from "@/lib/const";
 import { Colors, Enables, Peep, PeepParts } from "@/lib/types";
 import { currentCodePeep } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import Loader from "@/public/loader-circle.svg";
+import Image from "next/image";
 
 export default function Home() {
   const [refresh, setRefresh] = useState<number>(0);
@@ -121,51 +123,59 @@ export default function Home() {
         </small>
       </section>
       <section className="flex h-full w-full flex-col justify-evenly gap-10 bg-white py-8 md:py-12 lg:w-1/2 lg:py-8">
-        <div className="flex items-center justify-evenly gap-4 max-md:flex-col lg:overflow-x-auto lg:px-4">
-          <div dangerouslySetInnerHTML={{ __html: peep }} />
-          <div className="space-y-4">
-            {parts && (
-              <div>
-                {carousels.map(({ key, label, items }) => (
-                  <PartCarousel
-                    key={key}
-                    label={label}
-                    items={items!}
-                    onChange={(value) =>
-                      setSelectedParts((prev) => ({
-                        ...prev,
-                        [key]: value,
-                      }))
-                    }
-                  />
-                ))}
+        {parts && peep ? (
+          <>
+            <div className="flex items-center justify-evenly gap-4 max-md:flex-col lg:overflow-x-auto lg:px-4">
+              <div dangerouslySetInnerHTML={{ __html: peep }} />
+              <div className="space-y-4">
+                <div>
+                  {carousels.map(({ key, label, items }) => (
+                    <PartCarousel
+                      key={key}
+                      label={label}
+                      items={items!}
+                      onChange={(value) =>
+                        setSelectedParts((prev) => ({
+                          ...prev,
+                          [key]: value,
+                        }))
+                      }
+                    />
+                  ))}
+                </div>
+                <Enable
+                  values={enables}
+                  colors={colors}
+                  onChange={handleEnableChange}
+                  onColorChange={handleColorsChange}
+                />
+                <Button
+                  onClick={() => setRefresh(refresh + 1)}
+                  styles="font-title w-full animate-pulse1 hover:animate-none"
+                >
+                  Shuffle
+                </Button>
               </div>
-            )}
-            <Enable
-              values={enables}
-              colors={colors}
-              onChange={handleEnableChange}
-              onColorChange={handleColorsChange}
-            />
-            <Button
-              onClick={() => setRefresh(refresh + 1)}
-              styles="font-title w-full animate-pulse1 hover:animate-none"
-            >
-              Shuffle
-            </Button>
-          </div>
-        </div>
-        <div className="flex w-full flex-wrap items-center justify-center gap-4">
-          {formats.map((format) => (
-            <Button
-              key={format}
-              onClick={() => downloadPeep(peep, format)}
-              styles="w-20 text-center uppercase font-mono transition-transform duration-500 ease-in-out hover:-translate-y-4"
-            >
-              {format}
-            </Button>
-          ))}
-        </div>
+            </div>
+            <div className="flex w-full flex-wrap items-center justify-center gap-4">
+              {formats.map((format) => (
+                <Button
+                  key={format}
+                  onClick={() => downloadPeep(peep, format)}
+                  styles="w-20 text-center uppercase font-mono transition-transform duration-300 ease-in-out hover:-translate-y-3"
+                >
+                  {format}
+                </Button>
+              ))}
+            </div>
+          </>
+        ) : (
+          <Image
+            src={Loader}
+            alt="Loader"
+            className="m-auto w-1/3 animate-spin"
+          />
+        )}
       </section>
     </main>
   );
