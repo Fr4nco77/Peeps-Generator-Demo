@@ -20,7 +20,8 @@ const tiffany = localFont({
 
 export const metadata: Metadata = {
   title: "Peeps Generator",
-  description: "...",
+  description:
+    "Create, customize and download unique SVG avatars with Peeps Generator. Build peep characters programmatically or visually, export in multiple formats and integrate easily into your web projects.",
 };
 
 export default function RootLayout({
