@@ -5,10 +5,10 @@ import Image from "next/image";
 export default function Header() {
   return (
     <header className="relative">
-      <h1 className="font-title pr-20 text-4xl sm:text-5xl md:text-6xl font-bold italic">
+      <h1 className="font-title pr-20 text-4xl font-bold italic sm:text-5xl md:text-6xl">
         Peeps Generator
       </h1>
-      <p className="mt-2 mb-6 text-lg sm:text-xl md:text-2xl text-neutral-800">
+      <p className="mt-2 mb-6 text-lg text-neutral-800 sm:text-xl md:text-2xl">
         Unique avatars, ready for your code.
       </p>
       <nav className="absolute top-0 right-0 flex h-8 gap-4">
