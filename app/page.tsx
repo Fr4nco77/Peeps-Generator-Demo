@@ -125,7 +125,7 @@ export default function Home() {
       <section className="flex h-full w-full flex-col justify-evenly gap-10 bg-white py-8 md:py-12 lg:w-1/2 lg:py-8">
         {parts && peep ? (
           <>
-            <div className="flex items-center justify-evenly gap-4 max-md:flex-col lg:overflow-x-auto lg:px-4">
+            <div className="flex items-center justify-evenly gap-4 max-md:flex-col lg:overflow-x-auto lg:px-4 xl:overflow-visible">
               <div dangerouslySetInnerHTML={{ __html: peep }} />
               <div className="space-y-4">
                 <div>
