@@ -9,5 +9,9 @@ export async function POST(req: NextRequest) {
   const config = await req.json();
   const svg = createPeep(config);
 
-  return NextResponse.json(svg);
+  return new NextResponse(svg, {
+    headers: {
+      "Content-Type": "image/svg+xml",
+    },
+  });
 }

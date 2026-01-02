@@ -60,7 +60,7 @@ export default function Home() {
         ...enables,
       }),
     })
-      .then((res) => res.json())
+      .then((res) => res.text())
       .then((svg) => setPeep(svg));
   }, [refresh, enables, colors, selectedParts]);
 
