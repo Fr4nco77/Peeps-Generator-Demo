@@ -7,7 +7,11 @@ export const currentCodePeep = ({
   peepConfig: Peep;
   enablesConfig: Enables;
 }) => {
-  const peep = Object.keys(peepConfig).length === 0 ? undefined : peepConfig;
+  const isEmptyOrAllUndefined = (obj: Peep) =>
+    Object.keys(obj).length === 0 ||
+    Object.values(obj).every((value) => value === undefined);
+
+  const peep = isEmptyOrAllUndefined(peepConfig) ? undefined : peepConfig;
   const enables = Object.entries(enablesConfig).some(([, value]) => value)
     ? Object.fromEntries(
         Object.entries(enablesConfig).filter(([, value]) => value),
@@ -20,7 +24,7 @@ export const currentCodePeep = ({
       : JSON.stringify(
           {
             peep,
-            enables,
+            ...enables,
           },
           null,
           2,
